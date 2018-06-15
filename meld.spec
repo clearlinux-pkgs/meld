@@ -4,7 +4,7 @@
 #
 Name     : meld
 Version  : 3.18.1
-Release  : 2
+Release  : 3
 URL      : https://download.gnome.org/sources/meld/3.18/meld-3.18.1.tar.xz
 Source0  : https://download.gnome.org/sources/meld/3.18/meld-3.18.1.tar.xz
 Summary  : Visual diff and merge tool
@@ -113,7 +113,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1529024186
+export SOURCE_DATE_EPOCH=1529028039
 python3 setup.py build -b py3
 
 %install
@@ -138,9 +138,10 @@ echo ----[ mark ]----
 
 %files data
 %defattr(-,root,root,-)
+%exclude /usr/share/glib-2.0/schemas/gschemas.compiled
+%exclude /usr/share/icons/hicolor/icon-theme.cache
 /usr/share/appdata/meld.appdata.xml
 /usr/share/applications/meld.desktop
-/usr/share/glib-2.0/schemas/gschemas.compiled
 /usr/share/glib-2.0/schemas/org.gnome.meld.gschema.xml
 /usr/share/icons/HighContrast/scalable/apps/meld.svg
 /usr/share/icons/hicolor/16x16/actions/meld-change-apply-left.png
@@ -153,7 +154,6 @@ echo ----[ mark ]----
 /usr/share/icons/hicolor/32x32/apps/meld.png
 /usr/share/icons/hicolor/48x48/apps/meld-version-control.png
 /usr/share/icons/hicolor/48x48/apps/meld.png
-/usr/share/icons/hicolor/icon-theme.cache
 /usr/share/icons/hicolor/scalable/apps/meld.svg
 /usr/share/meld/icons/COPYING
 /usr/share/meld/icons/COPYING_CCBYSA3
