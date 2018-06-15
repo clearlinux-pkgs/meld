@@ -4,7 +4,7 @@
 #
 Name     : meld
 Version  : 3.18.1
-Release  : 3
+Release  : 4
 URL      : https://download.gnome.org/sources/meld/3.18/meld-3.18.1.tar.xz
 Source0  : https://download.gnome.org/sources/meld/3.18/meld-3.18.1.tar.xz
 Summary  : Visual diff and merge tool
