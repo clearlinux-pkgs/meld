@@ -1,44 +1,90 @@
 
-2018-06-19 meld 3.18.2
-======================
-
-  Fixes:
-
-   * Fix help launching on Windows (Vasily Galkin)
-   * Fix Windows compatibility issue with multiprocessing (Vasily Galkin)
-   * Fix incorrect state handling during tab close (Kai Willadsen)
-   * Fix commit action on a folder not working in git (Kai Willadsen)
-
-   * Bugs fixed: #196, #197
-
-
-2018-04-29 meld 3.18.1
+2018-03-28 meld 3.19.0
 ======================
 
   Features:
 
-   * Support for automated Windows builds using Appveyor (Vasily Galkin)
-   * The Find bar now hides when pressing Escape (Vladimir Panteleev)
+   * Initial Windows build pipeline using Appveyor (Vasily Galkin)
+   * Add new per-pane status bar with selectors for syntax highlighting and
+     text encoding (Kai Willadsen, with extensive testing by Vasily Galkin)
+   * Allow text encoding to be chosen from file selectors (Kai Willadsen)
+   * Add new go-to-line action and UI (Kai Willadsen)
+   * Folder comparison now explicitly indicates symlinks in the tree, and
+     shows the symlink target (Kai Willadsen)
+   * Inline highlighting now draws whitespace in any changes it covers (Kai
+     Willadsen)
+   * Improved contrast in dark theme support (Vitalii Dmitriev)
+   * Navigating between changes in file comparison now briefly animates the
+     outline, to make it easier to keep track of the focus in busy
+     comparisons (Kai Willadsen)
+
 
   Fixes:
 
-   * Several Windows fixes for cx_Freeze compatibility (Vasily Galkin)
-   * Fix slow startup on Windows due to FontConfig (Vasily Galkin)
-   * Translation and help fixes (Piotr Drąg)
-   * Hide our progress spinner on Windows for responsiveness (Kai Willadsen)
-   * Handle subprocess termination better in file comparisons (Kai Willadsen)
-   * Fix committing selected files only in Mercurial (Kai Willadsen)
-   * Fix Bazaar version control backend (Kai Willadsen)
+   * Find bar now hides when pressing Escape (Vladimir Panteleev)
+   * Handle file deletion where we can't move to trash (e.g., network mounts)
+     (Kai Willadsen)
+   * Guess whether we're running a dark theme, for supporting Tweak Tool
+     changes (Kai Willadsen)
+   * Keybindings for notebook switching work again (Kai Willadsen)
+   * Significantly speed up folder and version control comparisons by limiting
+     the file metadata we request (Kai Willadsen)
+   * Threading fixes for more responsive highlighting and better exit handling
+     (Kai Willadsen)
+   * Fix memory and file handle leakage for closed comparisons (Kai Willadsen)
+   * Make the --auto-compare command line flag work again (Kai Willadsen)
+   * Make multiple --diff command line options work again (Kai Willadsen)
+   * Fix committing selected files in Mercurial (Kai Willadsen)
+   * Fix Bazaar support for our Python 3 port (Kai Willadsen)
+   * Avoid a race conditon that made the "Resolve conflict" prompt unreliable
+     (Kai Willadsen)
+   * Fix invalid-iter crash when refreshing version control view (Kai
+     Willadsen)
+   * Make non-existent files writable by default (Kai Willadsen)
+   * Several fixes for translations, unicode typography, and typos (Piotr Drąg)
+   * Windows compatibility updates (Vasily Galkin, Kai Willadsen)
+   * Windows build fixes (Vasily Galkin)
+   * Add Gitlab CI for Python styling and lint, and update a lot of old code
+     to match (Kai Willadsen)
+   * Packaging fixes for AppStream (Balint Reczey)
 
-   * Bugs fixed: #133, 785313, 788487, 790335
+
+  Internal changes:
+
+   * Update GTK+ and GtkSourceView requirements to 3.20
+   * Migrate recently-used handling, comparison launching, and file
+     comparisons to use Gio for URI support (Chris Mayo, Kai Willadsen)
+   * Migrated to GNOME Gitlab for hosting and issue tracking
+
+   * Bugs fixed (bugzilla): 589366, 783989, 785313, 785630, 786629, 786867,
+     787256, 788455, 788487, 790335, 791173
+   * Issues fixed (gitlab): 46, 97, 133, 146, 151, 152, 158, 159, 161, 165
+
 
   Translations:
 
+   * Alan Mortensen (da)
    * Anders Jonsson (sv)
+   * Andika Triwidada (id)
+   * Andre Klapper (cs, de)
    * Ask Hjorth Larsen (da)
+   * Balázs Úr (hu)
+   * Daniel Mustieles (es)
+   * Daniel Șerbănescu (ro)
+   * Emin Tufan Çetin (tr)
+   * Enrico Nicoletto (pt_BR)
+   * Jiri Grönroos (fi)
+   * Joe Hansen (da)
+   * Jordi Mas (ca)
+   * Kristjan SCHMIDT (eo)
+   * Kukuh Syafaat (id)
+   * Marcos Lans (gl)
    * Marek Černocký (cs)
    * Mario Blättermann (de)
+   * Matej Urbančič (sl)
+   * Milo Casagrande (it)
    * Piotr Drąg (pl)
+   * Rafael Fontenelle (pt_BR)
 
 
 2017-09-10 meld 3.18.0
@@ -957,7 +1003,7 @@
         distinguish commands, output and errors (Kai Willadsen)
       * Support better sensitivity handling in VC comparisons, currently
         implemented by Git (Kai Willadsen)
-  
+
     * Sundry minor UI improvements:
       * Much HIG-ification and better wording for actions, dialogs and
         labels (Kai Willadsen, with diligent bug reporting from Adam Dingle)
@@ -1533,7 +1579,7 @@
 	* Added quick patch viewer via filediff context menu
 
 	* Smarter abbreviation for tab labels.
-	
+
 	* Add svn directory hide rule. Bug 306093.
 
 	* Fix inline highlighting for non-ascii encodings. Bug 304988.
@@ -1700,14 +1746,14 @@
 	* CVS Partial tree refreshing.
 
 	* Better parsing of CVS/Entries
-	
+
 	* CVS updates status when files are edited.
 
 	* Dirdiff now has case insensitive option.
 
 	* CVS warns if the patch is empty.
 
-	* Fix CVS modification times when UTC != localtime. 
+	* Fix CVS modification times when UTC != localtime.
 	  Thanks to and Martin Pool (report+patch) and Mike Grant (report)
 
 	* Initial i18n support.
@@ -1741,7 +1787,7 @@
 
 	* Add parent to dialogs. Improves window manager interaction.
 
-	* Poup new.. now behaves like normal popups. 
+	* Poup new.. now behaves like normal popups.
 
 2003-06-21 meld-0.8.2
 =====================
@@ -1791,14 +1837,14 @@
 2003-03-24 meld-0.7.9
 =====================
 
-	* Diff update is now incremental; That is updates happen on each 
+	* Diff update is now incremental; That is updates happen on each
 	  keypress instead of after a short timeout. This makes meld usable
 	  on large files with many differences.
 
 	* Much better loading interaction. The text is immediately visible
 	  and scrollable - the diffs are computed in an idle callback.
 
-	* CVS browser should now be considered beta not alpha. It works 
+	* CVS browser should now be considered beta not alpha. It works
 	  with any location without needing to run 'meld .'
 
 	* Right click on the tabs now pops up a tab menu.
@@ -1882,11 +1928,11 @@
 
 	* Add missing pixmaps for directory diff.
 
-	* Set about dialog properties correctly.  
+	* Set about dialog properties correctly.
 
 	* Fail if new style pygtk not present. (pygtk.require())
 
-	* Remove #! from non executable files. 
+	* Remove #! from non executable files.
 
 	* Set copyright correctly.
 
@@ -1937,7 +1983,7 @@
 =====================
 
 	* diff3 now fully functional (merging buttons etc)
-	 
+
 	* new cvs icons. Thanks to Jakub "Jimmac" Steiner for
 	  the icons and to Ross Burton for the suggestion.
 
@@ -1969,7 +2015,7 @@
 
 	* Tabbed interface - open many diffs at once
 
-	* Next/prev diff 
+	* Next/prev diff
 
 	* Unlimited undo
 
@@ -1988,7 +2034,7 @@
 	* Added file/save plus accelerators.
 
 	* Allow app to be run from different directory.
-	
+
 	* Add groups to undo.  Undo/redo works properly for merging.
 
 	* Added undo/redo for single doc.  Added timeouts for updating diff delay.
