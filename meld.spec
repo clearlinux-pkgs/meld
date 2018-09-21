@@ -4,7 +4,7 @@
 #
 Name     : meld
 Version  : 3.19.0
-Release  : 12
+Release  : 13
 URL      : https://download.gnome.org/sources/meld/3.19/meld-3.19.0.tar.xz
 Source0  : https://download.gnome.org/sources/meld/3.19/meld-3.19.0.tar.xz
 Summary  : Visual diff and merge tool
