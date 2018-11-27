@@ -4,7 +4,7 @@
 #
 Name     : meld
 Version  : 3.19.1
-Release  : 14
+Release  : 15
 URL      : https://download.gnome.org/sources/meld/3.19/meld-3.19.1.tar.xz
 Source0  : https://download.gnome.org/sources/meld/3.19/meld-3.19.1.tar.xz
 Summary  : Visual diff and merge tool
@@ -107,7 +107,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1542757708
+export SOURCE_DATE_EPOCH=1543348772
 python3 setup.py build
 
 %install
@@ -184,7 +184,7 @@ echo ----[ mark ]----
 /usr/share/meld/ui/vcview-ui.xml
 /usr/share/meld/ui/vcview.ui
 /usr/share/metainfo/org.gnome.meld.appdata.xml
-/usr/share/mime/packages/org.gnome.meld.xml
+/usr/share/mime-packages/org.gnome.meld.xml
 
 %files doc
 %defattr(0644,root,root,0755)
