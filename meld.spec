@@ -4,10 +4,10 @@
 #
 Name     : meld
 Version  : 3.20.0
-Release  : 17
+Release  : 18
 URL      : https://download.gnome.org/sources/meld/3.20/meld-3.20.0.tar.xz
 Source0  : https://download.gnome.org/sources/meld/3.20/meld-3.20.0.tar.xz
-Summary  : Compare files, directories and working copies
+Summary  : Visual diff and merge tool
 Group    : Development/Tools
 License  : BSD-2-Clause CC-BY-SA-3.0 GPL-2.0 GPL-2.0+
 Requires: meld-bin = %{version}-%{release}
@@ -17,6 +17,7 @@ Requires: meld-locales = %{version}-%{release}
 Requires: meld-man = %{version}-%{release}
 Requires: meld-python = %{version}-%{release}
 Requires: meld-python3 = %{version}-%{release}
+Requires: gtksourceview
 BuildRequires : buildreq-distutils3
 BuildRequires : buildreq-gnome
 BuildRequires : glib
@@ -34,7 +35,6 @@ Summary: bin components for the meld package.
 Group: Binaries
 Requires: meld-data = %{version}-%{release}
 Requires: meld-license = %{version}-%{release}
-Requires: meld-man = %{version}-%{release}
 
 %description bin
 bin components for the meld package.
@@ -107,11 +107,13 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1546799113
+export SOURCE_DATE_EPOCH=1553553676
+export LDFLAGS="${LDFLAGS} -fno-lto"
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
 %install
+export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/meld
 cp COPYING %{buildroot}/usr/share/package-licenses/meld/COPYING
