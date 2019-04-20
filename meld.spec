@@ -4,7 +4,7 @@
 #
 Name     : meld
 Version  : 3.20.1
-Release  : 19
+Release  : 20
 URL      : https://download.gnome.org/sources/meld/3.20/meld-3.20.1.tar.xz
 Source0  : https://download.gnome.org/sources/meld/3.20/meld-3.20.1.tar.xz
 Summary  : Compare files, directories and working copies
