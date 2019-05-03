@@ -1,3 +1,7 @@
 # This file contains additional runtime requirements that did not get
 # picked up automatically. One name per line, no whitespace.
-gtksourceview
+#
+#
+# As of 3.20.1 (May/2019) meld doesn't support gtksourceview 4
+# so we ough to require compat version instead.
+compat-gtksourceview-soname3
