@@ -4,10 +4,10 @@
 #
 Name     : meld
 Version  : 3.20.1
-Release  : 21
+Release  : 22
 URL      : https://download.gnome.org/sources/meld/3.20/meld-3.20.1.tar.xz
 Source0  : https://download.gnome.org/sources/meld/3.20/meld-3.20.1.tar.xz
-Summary  : Visual diff and merge tool
+Summary  : Compare files, directories and working copies
 Group    : Development/Tools
 License  : BSD-2-Clause CC-BY-SA-3.0 GPL-2.0 GPL-2.0+
 Requires: meld-bin = %{version}-%{release}
@@ -107,8 +107,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1556895123
-export LDFLAGS="${LDFLAGS} -fno-lto"
+export SOURCE_DATE_EPOCH=1557019193
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
