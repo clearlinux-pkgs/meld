@@ -4,10 +4,10 @@
 #
 Name     : meld
 Version  : 3.20.1
-Release  : 22
+Release  : 23
 URL      : https://download.gnome.org/sources/meld/3.20/meld-3.20.1.tar.xz
 Source0  : https://download.gnome.org/sources/meld/3.20/meld-3.20.1.tar.xz
-Summary  : Compare files, directories and working copies
+Summary  : Visual diff and merge tool
 Group    : Development/Tools
 License  : BSD-2-Clause CC-BY-SA-3.0 GPL-2.0 GPL-2.0+
 Requires: meld-bin = %{version}-%{release}
@@ -18,12 +18,15 @@ Requires: meld-man = %{version}-%{release}
 Requires: meld-python = %{version}-%{release}
 Requires: meld-python3 = %{version}-%{release}
 Requires: compat-gtksourceview-soname3
+Requires: pygobject
 BuildRequires : buildreq-distutils3
 BuildRequires : buildreq-gnome
+BuildRequires : compat-gtksourceview-soname3
 BuildRequires : glib
 BuildRequires : gtk3
 BuildRequires : intltool
 BuildRequires : libxml2
+BuildRequires : pygobject
 
 %description
 This is vc, the version control working copy library.
@@ -106,8 +109,9 @@ python3 components for the meld package.
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1557019193
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1562958175
+export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
