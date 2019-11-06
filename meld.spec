@@ -4,7 +4,7 @@
 #
 Name     : meld
 Version  : 3.20.1
-Release  : 24
+Release  : 26
 URL      : https://download.gnome.org/sources/meld/3.20/meld-3.20.1.tar.xz
 Source0  : https://download.gnome.org/sources/meld/3.20/meld-3.20.1.tar.xz
 Summary  : Visual diff and merge tool
@@ -27,6 +27,7 @@ BuildRequires : gtk3
 BuildRequires : intltool
 BuildRequires : libxml2
 BuildRequires : pygobject
+Patch1: 9cb590f9804a89d8914d0d7d6c89c336f6d86d86.patch
 
 %description
 This is vc, the version control working copy library.
@@ -104,13 +105,15 @@ python3 components for the meld package.
 
 %prep
 %setup -q -n meld-3.20.1
+cd %{_builddir}/meld-3.20.1
+%patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1562958175
+export SOURCE_DATE_EPOCH=1574290949
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -126,15 +129,18 @@ python3 setup.py build
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/meld
-cp COPYING %{buildroot}/usr/share/package-licenses/meld/COPYING
-cp data/icons/COPYING %{buildroot}/usr/share/package-licenses/meld/data_icons_COPYING
-cp data/icons/COPYING_CCBYSA3 %{buildroot}/usr/share/package-licenses/meld/data_icons_COPYING_CCBYSA3
-cp meld/vc/COPYING %{buildroot}/usr/share/package-licenses/meld/meld_vc_COPYING
+cp %{_builddir}/meld-3.20.1/COPYING %{buildroot}/usr/share/package-licenses/meld/4cc77b90af91e615a64ae04893fdffa7939db84c
+cp %{_builddir}/meld-3.20.1/data/icons/COPYING %{buildroot}/usr/share/package-licenses/meld/3e0c4049892ab31e3aaf45c71f830176bc566c14
+cp %{_builddir}/meld-3.20.1/data/icons/COPYING_CCBYSA3 %{buildroot}/usr/share/package-licenses/meld/80059f30d312011eaf041ce648eeca6473a08746
+cp %{_builddir}/meld-3.20.1/meld/vc/COPYING %{buildroot}/usr/share/package-licenses/meld/14c4e1f2e383319099e47e974f26fba40e0c975d
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
 %find_lang meld
+## Remove excluded files
+rm -f %{buildroot}/usr/share/glib-2.0/schemas/gschemas.compiled
+rm -f %{buildroot}/usr/share/icons/hicolor/icon-theme.cache
 
 %files
 %defattr(-,root,root,-)
@@ -145,8 +151,6 @@ echo ----[ mark ]----
 
 %files data
 %defattr(-,root,root,-)
-%exclude /usr/share/glib-2.0/schemas/gschemas.compiled
-%exclude /usr/share/icons/hicolor/icon-theme.cache
 /usr/share/applications/org.gnome.meld.desktop
 /usr/share/glib-2.0/schemas/org.gnome.meld.gschema.xml
 /usr/share/icons/HighContrast/scalable/apps/org.gnome.meld.svg
@@ -222,10 +226,10 @@ echo ----[ mark ]----
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/meld/COPYING
-/usr/share/package-licenses/meld/data_icons_COPYING
-/usr/share/package-licenses/meld/data_icons_COPYING_CCBYSA3
-/usr/share/package-licenses/meld/meld_vc_COPYING
+/usr/share/package-licenses/meld/14c4e1f2e383319099e47e974f26fba40e0c975d
+/usr/share/package-licenses/meld/3e0c4049892ab31e3aaf45c71f830176bc566c14
+/usr/share/package-licenses/meld/4cc77b90af91e615a64ae04893fdffa7939db84c
+/usr/share/package-licenses/meld/80059f30d312011eaf041ce648eeca6473a08746
 
 %files man
 %defattr(0644,root,root,0755)
