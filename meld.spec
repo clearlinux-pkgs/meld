@@ -4,10 +4,10 @@
 #
 Name     : meld
 Version  : 3.20.2
-Release  : 29
+Release  : 30
 URL      : https://download.gnome.org/sources/meld/3.20/meld-3.20.2.tar.xz
 Source0  : https://download.gnome.org/sources/meld/3.20/meld-3.20.2.tar.xz
-Summary  : Visual diff and merge tool
+Summary  : Compare files, directories and working copies
 Group    : Development/Tools
 License  : BSD-2-Clause CC-BY-SA-3.0 GPL-2.0 GPL-2.0+
 Requires: meld-bin = %{version}-%{release}
@@ -111,7 +111,8 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1582152864
+export SOURCE_DATE_EPOCH=1583173313
+# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
