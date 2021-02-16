@@ -1,0 +1,7 @@
+pypi(graphtools)
+pypi(numpy)
+pypi(pandas)
+pypi(pygsp)
+pypi(scipy)
+pypi(scprep)
+pypi(sklearn)
