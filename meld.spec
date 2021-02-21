@@ -4,7 +4,7 @@
 #
 Name     : meld
 Version  : 3.20.3
-Release  : 38
+Release  : 39
 URL      : https://download.gnome.org/sources/meld/3.20/meld-3.20.3.tar.xz
 Source0  : https://download.gnome.org/sources/meld/3.20/meld-3.20.3.tar.xz
 Summary  : Visual diff and merge tool
@@ -97,7 +97,6 @@ python components for the meld package.
 Summary: python3 components for the meld package.
 Group: Default
 Requires: python3-core
-Provides: pypi(meld)
 
 %description python3
 python3 components for the meld package.
@@ -112,7 +111,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1613501721
+export SOURCE_DATE_EPOCH=1613872552
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
