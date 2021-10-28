@@ -4,7 +4,7 @@
 #
 Name     : meld
 Version  : 3.20.4
-Release  : 44
+Release  : 45
 URL      : https://download.gnome.org/sources/meld/3.20/meld-3.20.4.tar.xz
 Source0  : https://download.gnome.org/sources/meld/3.20/meld-3.20.4.tar.xz
 Summary  : Visual diff and merge tool
