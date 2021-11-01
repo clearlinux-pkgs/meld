@@ -4,7 +4,7 @@
 #
 Name     : meld
 Version  : 3.20.4
-Release  : 47
+Release  : 48
 URL      : https://download.gnome.org/sources/meld/3.20/meld-3.20.4.tar.xz
 Source0  : https://download.gnome.org/sources/meld/3.20/meld-3.20.4.tar.xz
 Summary  : Visual diff and merge tool
@@ -111,7 +111,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1628865029
+export SOURCE_DATE_EPOCH=1635752814
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -137,8 +137,8 @@ cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
 %find_lang meld
 ## Remove excluded files
-rm -f %{buildroot}/usr/share/glib-2.0/schemas/gschemas.compiled
-rm -f %{buildroot}/usr/share/icons/hicolor/icon-theme.cache
+rm -f %{buildroot}*/usr/share/glib-2.0/schemas/gschemas.compiled
+rm -f %{buildroot}*/usr/share/icons/hicolor/icon-theme.cache
 
 %files
 %defattr(-,root,root,-)
