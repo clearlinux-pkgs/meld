@@ -1,79 +1,209 @@
 
-2021-08-13 meld 3.20.4
+2022-09-04 meld 3.22.0
 ======================
 
   Fixes:
 
-   * Update Windows build to force all-users installation (Kai Willadsen)
-   * Work around wrapping label allocation issues (Kai Willadsen)
-   * Add the Meld icon to the Windows add/remove programs UI (Kai Willadsen)
-   * Add a basic GTK settings.ini for Windows builds (Kai Willadsen)
-   * Clarify licensing in appdata (Kai Willadsen)
-   * Update copyright in About dialog (Kai Willadsen)
-
-   * Issues fixed: 559, 563, 579, 588, 603
-
+   * Fix text filter changes on existing comparisons (Kai Willadsen)
+   * Build fixes (Kai Willadsen)
+   * Documentation updates (Kai Willadsen)
 
   Translations:
 
-   * Alexey Rubtsov (ru)
-   * Andika Triwidada (id)
-   * Asier Sarasua Garmendia (eu)
-   * Charles Monzat (fr)
-   * Hugo Carvalho (pt)
-   * Luna Jernberg (sv)
+   * Anders Jonsson (sv)
+   * Emin Tufan Çetin (tr)
    * Piotr Drąg (pl)
-   * Rafael Fontenelle (pt_BR)
+
+
+2022-08-14 meld 3.21.3
+======================
+
+  Features:
+
+   * Add shortcut for open externally action (Kai Willadsen)
+   * Add improved tooltips for tab labels (Kai Willadsen)
+
+  Fixes:
+
+   * Move horizontal-icon menu section to regular menu items (Kai Willadsen)
+   * Fix chunk navigation actions sometimes not working after chunk push/pull
+     actions (Kai Willadsen)
+   * Show more parent context in path label display (Kai Willadsen)
+   * Update meson build to strip env from shebang line (Kai Willadsen)
+   * Fix left-click chunk actions under certain window managers (Dmytro Bagrii)
+   * Fix version control showing console windows on Windows (Kai Willadsen)
+   * Fix path label display for very long filenames (Kai Willadsen)
+   * CI fixes (Bartłomiej Piotrowski, Kai Willadsen)
+   * Issues fixed: #141, #496, #646, #658, #682, #692, #694, #697
+
+  Translations:
+
+   * Anders Jonsson (sv)
+   * Hugo Carvalho (pt)
+   * Jürgen Benvenuti (de)
+   * Piotr Drąg (pl)
+   * Sergej A (ru)
+   * Yuri Chornoivan (uk)
+
+
+2022-06-18 meld 3.21.2
+======================
+
+  Features:
+
+   * Folder comparison now supports compare differently-named files across
+     panes, by marking files for comparison (Helly Guo)
+   * Synchronization points are now significantly easier to use and more
+     robust, and have new user documentation (Roberto Vidal)
+   * Added option to ignore Unicode normalisation form differences when
+     comparing paths (Dan B)
+   * The files or folders being compared can now be swapped in two pane mode,
+     using the new View -> Swap left and right panes menu item (Helly Guo)
+   * Folder comparisons now show a "(scanning...)" indication in tree view
+     rows as an additional visual cue that the comparison is still running
+     (Kai Willadsen)
+   * Folder comparisons have a new optional ISO-format time column (Kai
+     Willadsen)
+
+  Fixes:
+
+   * Update icon usage to support stock icon removal from new Adwaita versions
+     (Jan Tojnar)
+   * Build fix for Meson 0.61.0 (Silvio Fricke)
+   * The new pathlabel widgets now support user-provided custom labels (Kai
+     Willadsen)
+   * Fix file selectors in folder comparisons to always open in the current
+     folder (Kai Willadsen)
+   * Using a custom save path (i.e., the --output flag) now sets a buffer as
+     modified, so that unchanged merges can be saved (Kai Willadsen)
+   * Comparing new or deleted rows in folder comparison now opens a two-pane
+     file comparisons for consistency (Kai Willadsen)
+   * Destructive dialog actions now have appropriate styling (Kai Willadsen)
+   * Invalid user settings for folder comparison columns are now handled more
+     gracefully (Kai Willadsen)
+   * The nightly flatpak build now includes Git to make version control
+     comparisons somewhat functional (Kai Willadsen)
+   * Issues fixed: #11, #85, #188, #319, #381, #475, #492, #581, #620, #638,
+     #645, #660, #662, #672
+
+  Translations:
+
+   * Alan Mortensen (da)
+   * Anders Jonsson (sv)
+   * Andre Klapper (ru)
+   * Asier Sarasua Garmendia (eu)
+   * Balázs Úr (hu)
+   * Boyuan Yang (zh_CN)
+   * Daniel Mustieles (es)
+   * Daniel Șerbănescu (ro)
+   * Emin Tufan Çetin (tr)
+   * Enrico Nicoletto (pt_BR)
+   * Hugo Carvalho (pt)
+   * Jiri Grönroos (fi)
+   * Jordi Mas (ca)
+   * Jürgen Benvenuti (de)
+   * Kjell Cato Heskjestad (nb)
+   * Luming Zh (zh_CN)
+   * Luna Jernberg (sv)
+   * Marek Černocký (cs)
+   * Matej Urbančič (sl)
+   * Matheus Barbosa (pt_BR)
+   * Milo Casagrande (it)
+   * Piotr Drąg (pl)
+   * Roberto Vidal ()
+   * Sabri Ünal (tr)
+   * Sergej A (ru)
+   * sicklylife (ja)
    * Yuri Chornoivan (uk)
    * Мирослав Николић (sr)
 
 
-2021-02-13 meld 3.20.3
+2022-01-07 meld 3.21.1
 ======================
+
+  UI changes:
+
+   * A new custom per-pane location display widget replaces the standard GTK+
+     file chooser button and our existing placeholder path display, including
+     actions for opening containing folder and copying file paths (Kai
+     Willadsen)
+   * Version control comparison has had its action bar modernised in line with
+     file and folder comparison (Kai Willadsen)
+
+
+  Features:
+
+   * The find bar now remembers the previous search across panes (Jack)
+   * We show a warning to the user if they're trying to compare a file or
+     folder to itself (Jack)
+   * Meld no longer uses custom file chooser dialogs, improving portability
+     and flatpak behaviour (Mario Aichinger)
+   * Two pane comparisons now allow Alt+Right/Left to work in either pane
+     (Anatoli Babenia)
+   * Certain header bar actions (e.g., conflict navigation, filters) are now
+     only shown in their appropriate comparison types (Kai Willadsen)
+   * The application title no longer includes the per-comparison label (Kai
+     Willadsen)
+   * Add a preference for GTK's dark theme support (Kai Willadsen)
+   * Retain clipboard contents after exiting Meld (Kai Willadsen)
+
 
   Fixes:
 
+   * Fix incorrect detection of FUSE directory comparisons as remote (mscdex)
+   * Fix "Open Externally" on Windows for paths with spaces (adam0antium)
+   * Fix syntax highlighting in version control by using the correct file
+     extension (Alan Suran)
+   * Move application icons into the resource bundle (Vasily Galkin)
+   * Improved error reporting for invalid change actions (Anatoli Babenia)
+   * Fix too-large minimum window size from status bar buttons (Kai Willadsen)
+   * Fix Subversion comparsion on Python 3.9 (Kai Willadsen)
+   * Fix bad translation source strings with multiple arguments (Kai Willadsen)
+   * Fix performance regression in file comparison line splitting logic (Kai
+     Willadsen)
    * Fix folder comparison sensitivity breaking when cancelling a scan (Kai
      Willadsen)
-   * Fix Subversion comparsion on Python 3.9 (Kai Willadsen)
-   * Retain clipboard contents after exiting Meld (Kai Willadsen)
-   * Fix wrapping in notification bars (Kai Willadsen)
-   * Fix border width in our file selection dialog (Kai Willadsen)
    * Fix occasional traceback when closing comparisons (Kai Willadsen)
-   * Update links to reflect move to Discourse (Kai Willadsen)
+   * Fix orphaned comparison helper process when quitting (Kai Willadsen)
+   * Minor UI fixes:
+     * Fix About dialog URL (TotalCaesar659)
+     * Update About dialog copyright (Kai Willadsen)
+     * The new comparison page now better distinguishes the "Compare" and
+       "Blank Comparison" actions (Kai Willadsen)
+     * The comparison overview map is now more responsive when dragging (Kai
+       Willadsen)
+     * The find bar now waits briefly before searching to improve
+       responsiveness (Kai Willadsen)
+     * The find bar no longer hides when it loses focus (Kai Willadsen)
+     * Allow preferences dialog to be resized (Kai Willadsen)
+     * Main menu can now be activated with F10
+     * Find next/previous can now be activated with F3/Shift+F3 (Kai Willadsen)
+   * Windows fixes:
+     * Add a MeldConsole.exe executable for running Meld from the console (Kai
+       Willadsen)
+     * Update Windows build to force all-users installation (Kai Willadsen)
+     * Improve default monospace font on Windows (Kai Willadsen)
+     * Fix empty line height and fallback fonts by changing the Pango font
+       backend to fontconfig on Windows (Kai Willadsen)
+     * Add Meld's install directory to the Windows PATH (Kai Willadsen)
+     * Add a basic GTK settings.ini for Windows builds (Kai Willadsen)
+     * Add the Meld icon to the Windows add/remove programs UI (Kai Willadsen)
+     * Fix file comparison holding a directory handle after close (Kai
+       Willadsen)
+   * Issues fixed: 25, 91, 143, 354, 433, 445, 453, 459, 477, 482, 488, 491,
+     499, 502, 526, 530, 539, 541, 557, 561, 564, 565, 571, 579, 590, 603
 
-   * Issues fixed: 432, 451, 482, 499, 502, 526
 
+  Internal changes:
 
-  Translations:
-
-   * Andika Triwidada (id)
-   * Daniel Șerbănescu (ro)
-   * Sabri Ünal (tr)
-   * Stephan Woidowski (de)
-   * Yuri Chornoivan (uk)
-   * Мирослав Николић (sr)
-
-2020-02-16 meld 3.20.2
-======================
-
-  Fixes:
-
-   * Fix crash when launched from external process on Windows (Vasily Galkin)
-   * Fix single-instance behaviour on Windows (Vasily Galkin)
-   * Fix display of large file sizes (Andrey Efremov)
-   * Set file chooser encoding to autodetect by default (Kai Willadsen)
-   * Always use UTF-8 as user's "current" encoding on Windows (Kai Willadsen)
-   * Fix ignoring blank lines on text-filtered files in folder comparison (Kai
+   * Modernise and improve the new Meson build rules (Iñigo Martínez)
+   * CI + build improvements (Jason Edson, Jordan Petridis, Vasily Galkin, Kai
      Willadsen)
-   * Fix expand/collapse actions for missing folders (Kai Willadsen)
-   * Fix some incorrect action sensitivity settings (Kai Willadsen)
-   * Fix height of commit dialog (Kai Willadsen)
-   * Fix install support for Python 3.8 (Kai Willadsen)
-   * Add support for file debug logging on Windows (Kai Willadsen)
-   * Fix icon display on Windows (Kai Willadsen)
-
-   * Issues fixed: 267, 279, 314, 322, 337, 341, 342, 350, 351, 359
+   * Nightly Meld builds now use the standard nightly icon styling (Kai
+     Willadsen)
+   * Clarify licensing in appdata (Kai Willadsen)
+   * Windows build fixes (Kai Willadsen)
+   * Add documentation on hosting infrastructure (Kai Willadsen)
 
 
   Translations:
@@ -81,36 +211,162 @@
    * Anders Jonsson (sv)
    * Andika Triwidada (id)
    * Asier Sarasua Garmendia (eu)
+   * Ask Hjorth Larsen (da)
+   * Balázs Úr (hu)
+   * Christian Kirbach (de)
+   * Clay Stan (zh_CN)
+   * Daniel Mustieles (es)
+   * Daniel Șerbănescu (ro)
+   * Dz Chen (zh_CN)
+   * Emin Tufan Çetin (tr)
+   * Enrico Nicoletto (pt_BR)
+   * Hugo Carvalho (pt)
+   * Jiri Grönroos (fi)
+   * Jordi Mas (ca)
+   * Julien Hardelin (fr)
+   * Luna Jernberg (sv)
+   * Marek Černocký (cs)
+   * Matej Urbančič (sl)
+   * Muhammet Kara (tr)
+   * Philipp Kiemle (de)
+   * Piotr Drąg (pl)
+   * Rafael Fontenelle (pt_BR)
+   * Rodrigo Lledó (es)
+   * Yi-Jyun Pan (zh_TW)
+   * Yuri Chornoivan (uk)
+   * Мирослав Николић (sr)
+
+
+2020-04-19 meld 3.21.0
+======================
+
+  UI changes:
+
+   * Move to a modern GTK headerbar-based design, including:
+     * More extensive action support in the header bar
+     * New comparison overview map widget that provides a clearer overview for
+       multiple panes at once, and allows for more natural scrollbar
+       positioning (Kai Willadsen)
+     * Text, filename and version filters are now all accessible from the
+       toolbar (Kai Willadsen)
+     * Refreshed find bar that more closely matches other applications (Kai
+       Willadsen)
+     * Remove application menu in line with Initiatives#4 (Kai Willadsen)
+     * New recent comparison selection widget (Kai Willadsen)
+     * Change tab style to be full-width and hidden for single tab windows (Kai
+       Willadsen)
+   * Make file comparison change navigation more intuitive by changing how it
+     decides where to scroll from (Heikki Ketoharju)
+   * Completely refreshed Meld application icon (Alex Monday)
+   * File comparison now has overscroll at the bottom of file comparisons,
+     making it easier to see end-of-file differences and improving scroll
+     syncing (Kai Willadsen)
+   * Text wrapping, whitespace, line numbers and line highlight can now all be
+     toggled from the file comparison status bar (Kai Willadsen)
+
+
+  Features:
+
+   * Add support for CVS in version control comparisons (gitqlt)
+   * Copy selected file paths in folder comparison (WenGuoyao)
+   * Improve dark theme detection so custom Meld highlighting better matches
+     the user's theme (Kai Willadsen)
+   * Meld's built-in GtkSourceView schemes now support syntax highlighting
+     (Kai Willadsen)
+   * Moving past the first or last change using our change navigation now
+     alerts with the standard error bell (Kai Willadsen)
+   * Support nightly Flatpak builds of Meld using GNOME's CI (Kai Willadsen)
+   * Support development using GNOME Builder's workflow
+
+
+  Fixes:
+
+   * CI and build system fixes (Michael Behrisch, Frank Dana, Piotr Drąg, Vasily Galkin)
+   * Fix running uninstalled from non-project-base folder (Vasily Galkin)
+   * Fix file comparison closing after file save (Vasily Galkin)
+   * Fix file comparison handling of certain line breaks (Kai Willadsen)
+   * Fix folder comparison display of large file sizes (andre)
+   * Fix folder comparisons with pre-epoch timestamps (Kai Willadsen)
+   * Fix folder comparisons not handling ignore blank lines + text filters (Kai
+     Willadsen)
+   * Handle file deletion better on NFS mounts (Kai Willadsen)
+   * Fix handling of bad filter regular expressions (Kai Willadsen)
+   * Fix push action on missing changes in three way comparison (Kai Willadsen)
+   * Default file chooser encoding to autodetect (Kai Willadsen)
+   * Minor UI fixes:
+     * Statusbar now correctly sets default encoding & file type for empty
+       files (Kai Willadsen)
+     * Statusbar tries to keep a constant width for the cursor label (Kai
+       Willadsen)
+     * Folder comparisons set sensitivity correctly for empty rows (Kai
+       Willadsen)
+     * Give commit dialog message area a reasonable height (Kai Willadsen)
+     * Fix long file name wrapping in info bar notifications (Kai Willadsen)
+     * Fix long file name ellipsization in file comparisons (Kai Willadsen)
+   * Windows fixes:
+     * Fix crash when started with unexpected environment (Vasily Galkin)
+     * Fix dbus support for single-instance behaviour (Vasily Galkin)
+     * Fix internationalisation building from source (ThunderEX)
+     * Fix SVG icon display (Kai Willadsen)
+     * Support logging to a file on Windows for debugging (Kai Willadsen)
+     * Default file encoding to UTF-8 to avoid Windows-specific locale issues
+       (Kai Willadsen)
+   * Typo fixes (luzpaz)
+   * Localisation fixes (Piotr Drąg)
+
+
+  Internal changes:
+
+   * Add Meson build system support; setuptools is still supported for Windows
+     and Mac OS builds, but Linux distributions should switch to building with
+     Meson (Bilal Elmoussaoui, Kai Willadsen)
+   * Move from GtkUIManager to GAction-based actions
+   * Move all UI-file-constructed widgets from custom Python wrapper classes
+     to using real GtkWidget templates
+   * Move UI templates, menus, custom icons and CSS to be resource-loaded
+   * Move to pre-commit using flake8 and isort for CI linting
+   * Move to new GtkSourceView 4 API
+   * Modernised Python GObject API usage, including signal and property usage
+   * Fix some deprecated GTK API usage
+   * Support Python 3.8
+   * Updated dependencies:
+     * Python 3.6
+     * GTK+ 3.20
+     * GLib 2.48
+     * GtkSourceView 4.0
+     * pygobject 3.30
+     * pycairo 1.15
+
+   * Issues fixed: 62, 78, 119, 170, 240, 265, 265, 267, 279, 290, 313, 314,
+     316, 321, 322, 337, 341, 342, 344, 344, 350, 351, 359, 419, 432, 439, 442,
+     451
+
+
+  Translations:
+
+   * Alan Mortensen (da)
+   * Anders Jonsson (sv)
+   * Asier Sarasua Garmendia (eu)
+   * Ask Hjorth Larsen (da)
+   * Balázs Meskó (hu)
    * Balázs Úr (hu)
    * Daniel Mustieles (es)
+   * Daniel Șerbănescu (ro)
+   * Emin Tufan Çetin (tr)
+   * Fran Dieguez (gl)
+   * Guillaume Bernard (fr)
+   * Jiri Grönroos (fi)
+   * Kukuh Syafaat (id)
    * Marek Černocký (cs)
+   * Matej Urbančič (sl)
    * Milo Casagrande (it)
    * Piotr Drąg (pl)
    * Rafael Fontenelle (pt_BR)
-
-
-2019-03-31 meld 3.20.1
-======================
-
-  Fixes:
-
-   * Fix bad comparison highlighting with VT characters (Kai Willadsen)
-   * Fix folder comparison display with >2G files (Kai Willadsen)
-   * Fix support for missing folders in folder comparison (Kai Willadsen)
-   * Handle trash-related errors with NFS mounts (Kai Willadsen)
-   * Add release metadata to appstream data (Kai Willadsen)
-
-   * Issues fixed: 268, 295
-
-
-  Translations:
-
-   * Anders Jonsson (sv)
-   * Balázs Úr (hu)
-   * Daniel Mustieles (es)
-   * Marek Cernocky (cs)
    * Ryuta Fujii (ja)
+   * Sabri Ünal (tr)
+   * sicklylife (ja)
    * Wolfgang Stöggl (de)
+   * Yuri Chornoivan (uk)
 
 
 2019-01-06 meld 3.20.0
