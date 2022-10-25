@@ -4,7 +4,7 @@
 #
 Name     : meld
 Version  : 3.22.0
-Release  : 52
+Release  : 54
 URL      : https://download.gnome.org/sources/meld/3.22/meld-3.22.0.tar.xz
 Source0  : https://download.gnome.org/sources/meld/3.22/meld-3.22.0.tar.xz
 Summary  : Visual diff and merge tool
@@ -37,7 +37,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1663965893
+export SOURCE_DATE_EPOCH=1666713613
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
