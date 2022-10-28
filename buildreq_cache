@@ -1,0 +1,6 @@
+3.22.0
+appstream-glib
+gtksourceview-dev
+pkgconfig(gtksourceview-4)
+pkgconfig(py3cairo)
+pkgconfig(pygobject-3.0)

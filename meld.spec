@@ -4,40 +4,118 @@
 #
 Name     : meld
 Version  : 3.22.0
-Release  : 54
+Release  : 55
 URL      : https://download.gnome.org/sources/meld/3.22/meld-3.22.0.tar.xz
 Source0  : https://download.gnome.org/sources/meld/3.22/meld-3.22.0.tar.xz
 Summary  : Visual diff and merge tool
 Group    : Development/Tools
 License  : BSD-2-Clause GPL-2.0
+Requires: meld-bin = %{version}-%{release}
+Requires: meld-data = %{version}-%{release}
+Requires: meld-license = %{version}-%{release}
+Requires: meld-locales = %{version}-%{release}
+Requires: meld-man = %{version}-%{release}
+Requires: meld-python = %{version}-%{release}
+Requires: meld-python3 = %{version}-%{release}
 Requires: compat-gtksourceview-soname3
 Requires: pygobject
+BuildRequires : appstream-glib
 BuildRequires : buildreq-distutils3
 BuildRequires : buildreq-gnome
 BuildRequires : buildreq-meson
 BuildRequires : glib
 BuildRequires : gtk3
+BuildRequires : gtksourceview-dev
 BuildRequires : intltool
 BuildRequires : libxml2
+BuildRequires : pkgconfig(gtksourceview-4)
+BuildRequires : pkgconfig(py3cairo)
+BuildRequires : pkgconfig(pygobject-3.0)
 
 %description
 Meld is the visual diff and merge tool of GNOME, targeted at developers. It
 allows users to compare two or three files or directories visually,
 color-coding the different lines.
 
+%package bin
+Summary: bin components for the meld package.
+Group: Binaries
+Requires: meld-data = %{version}-%{release}
+Requires: meld-license = %{version}-%{release}
+
+%description bin
+bin components for the meld package.
+
+
+%package data
+Summary: data components for the meld package.
+Group: Data
+
+%description data
+data components for the meld package.
+
+
+%package doc
+Summary: doc components for the meld package.
+Group: Documentation
+Requires: meld-man = %{version}-%{release}
+
+%description doc
+doc components for the meld package.
+
+
+%package license
+Summary: license components for the meld package.
+Group: Default
+
+%description license
+license components for the meld package.
+
+
+%package locales
+Summary: locales components for the meld package.
+Group: Default
+
+%description locales
+locales components for the meld package.
+
+
+%package man
+Summary: man components for the meld package.
+Group: Default
+
+%description man
+man components for the meld package.
+
+
+%package python
+Summary: python components for the meld package.
+Group: Default
+Requires: meld-python3 = %{version}-%{release}
+
+%description python
+python components for the meld package.
+
+
+%package python3
+Summary: python3 components for the meld package.
+Group: Default
+Requires: python3-core
+
+%description python3
+python3 components for the meld package.
+
+
 %prep
 %setup -q -n meld-3.22.0
 cd %{_builddir}/meld-3.22.0
-pushd ..
-cp -a meld-3.22.0 buildavx2
-popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1666713613
+export SOURCE_DATE_EPOCH=1666936449
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -46,40 +124,169 @@ export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
 export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
-export MAKEFLAGS=%{?_smp_mflags}
-python3 setup.py build
+CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain   builddir
+ninja -v -C builddir
 
-pushd ../buildavx2/
-export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
-export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
-export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
-export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
-export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
-python3 setup.py build
-
-popd
 %install
-export MAKEFLAGS=%{?_smp_mflags}
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/meld
-cp %{_builddir}/meld-%{version}/COPYING %{buildroot}/usr/share/package-licenses/meld/4cc77b90af91e615a64ae04893fdffa7939db84c || :
-cp %{_builddir}/meld-%{version}/meld/vc/COPYING %{buildroot}/usr/share/package-licenses/meld/14c4e1f2e383319099e47e974f26fba40e0c975d || :
-python3 -tt setup.py build  install --root=%{buildroot}
-echo ----[ mark ]----
-cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
-echo ----[ mark ]----
-pushd ../buildavx2/
-export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
-export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
-export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
-export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
-export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
-python3 -tt setup.py build install --root=%{buildroot}-v3
-popd
+cp %{_builddir}/meld-%{version}/COPYING %{buildroot}/usr/share/package-licenses/meld/4cc77b90af91e615a64ae04893fdffa7939db84c
+cp %{_builddir}/meld-%{version}/meld/vc/COPYING %{buildroot}/usr/share/package-licenses/meld/14c4e1f2e383319099e47e974f26fba40e0c975d
+DESTDIR=%{buildroot} ninja -C builddir install
+%find_lang meld
 ## Remove excluded files
 rm -f %{buildroot}*/usr/share/glib-2.0/schemas/gschemas.compiled
 rm -f %{buildroot}*/usr/share/icons/hicolor/icon-theme.cache
-/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
+
+%files bin
+%defattr(-,root,root,-)
+/usr/bin/meld
+
+%files data
+%defattr(-,root,root,-)
+/usr/share/applications/org.gnome.Meld.desktop
+/usr/share/glib-2.0/schemas/org.gnome.meld.gschema.xml
+/usr/share/icons/hicolor/scalable/apps/org.gnome.Meld.svg
+/usr/share/icons/hicolor/symbolic/apps/org.gnome.Meld-symbolic.svg
+/usr/share/meld/org.gnome.Meld.gresource
+/usr/share/meld/styles/meld-base.style-scheme.xml
+/usr/share/meld/styles/meld-dark.style-scheme.xml
+/usr/share/metainfo/org.gnome.Meld.appdata.xml
+/usr/share/mime-packages/org.gnome.Meld.xml
+
+%files doc
+%defattr(0644,root,root,0755)
+/usr/share/help/C/meld/command-line.page
+/usr/share/help/C/meld/file-changes.page
+/usr/share/help/C/meld/file-filters.page
+/usr/share/help/C/meld/file-mode.page
+/usr/share/help/C/meld/flattened-view.page
+/usr/share/help/C/meld/folder-mode.page
+/usr/share/help/C/meld/index.page
+/usr/share/help/C/meld/introduction.page
+/usr/share/help/C/meld/keyboard-shortcuts.page
+/usr/share/help/C/meld/legal.xml
+/usr/share/help/C/meld/missing-functionality.page
+/usr/share/help/C/meld/preferences.page
+/usr/share/help/C/meld/resolving-conflicts.page
+/usr/share/help/C/meld/text-filters.page
+/usr/share/help/C/meld/vc-mode.page
+/usr/share/help/C/meld/vc-supported.page
+/usr/share/help/cs/meld/command-line.page
+/usr/share/help/cs/meld/file-changes.page
+/usr/share/help/cs/meld/file-filters.page
+/usr/share/help/cs/meld/file-mode.page
+/usr/share/help/cs/meld/flattened-view.page
+/usr/share/help/cs/meld/folder-mode.page
+/usr/share/help/cs/meld/index.page
+/usr/share/help/cs/meld/introduction.page
+/usr/share/help/cs/meld/keyboard-shortcuts.page
+/usr/share/help/cs/meld/legal.xml
+/usr/share/help/cs/meld/missing-functionality.page
+/usr/share/help/cs/meld/preferences.page
+/usr/share/help/cs/meld/resolving-conflicts.page
+/usr/share/help/cs/meld/text-filters.page
+/usr/share/help/cs/meld/vc-mode.page
+/usr/share/help/cs/meld/vc-supported.page
+/usr/share/help/de/meld/command-line.page
+/usr/share/help/de/meld/file-changes.page
+/usr/share/help/de/meld/file-filters.page
+/usr/share/help/de/meld/file-mode.page
+/usr/share/help/de/meld/flattened-view.page
+/usr/share/help/de/meld/folder-mode.page
+/usr/share/help/de/meld/index.page
+/usr/share/help/de/meld/introduction.page
+/usr/share/help/de/meld/keyboard-shortcuts.page
+/usr/share/help/de/meld/legal.xml
+/usr/share/help/de/meld/missing-functionality.page
+/usr/share/help/de/meld/preferences.page
+/usr/share/help/de/meld/resolving-conflicts.page
+/usr/share/help/de/meld/text-filters.page
+/usr/share/help/de/meld/vc-mode.page
+/usr/share/help/de/meld/vc-supported.page
+/usr/share/help/el/meld/command-line.page
+/usr/share/help/el/meld/file-changes.page
+/usr/share/help/el/meld/file-filters.page
+/usr/share/help/el/meld/file-mode.page
+/usr/share/help/el/meld/flattened-view.page
+/usr/share/help/el/meld/folder-mode.page
+/usr/share/help/el/meld/index.page
+/usr/share/help/el/meld/introduction.page
+/usr/share/help/el/meld/keyboard-shortcuts.page
+/usr/share/help/el/meld/legal.xml
+/usr/share/help/el/meld/missing-functionality.page
+/usr/share/help/el/meld/preferences.page
+/usr/share/help/el/meld/resolving-conflicts.page
+/usr/share/help/el/meld/text-filters.page
+/usr/share/help/el/meld/vc-mode.page
+/usr/share/help/el/meld/vc-supported.page
+/usr/share/help/es/meld/command-line.page
+/usr/share/help/es/meld/file-changes.page
+/usr/share/help/es/meld/file-filters.page
+/usr/share/help/es/meld/file-mode.page
+/usr/share/help/es/meld/flattened-view.page
+/usr/share/help/es/meld/folder-mode.page
+/usr/share/help/es/meld/index.page
+/usr/share/help/es/meld/introduction.page
+/usr/share/help/es/meld/keyboard-shortcuts.page
+/usr/share/help/es/meld/legal.xml
+/usr/share/help/es/meld/missing-functionality.page
+/usr/share/help/es/meld/preferences.page
+/usr/share/help/es/meld/resolving-conflicts.page
+/usr/share/help/es/meld/text-filters.page
+/usr/share/help/es/meld/vc-mode.page
+/usr/share/help/es/meld/vc-supported.page
+/usr/share/help/pl/meld/command-line.page
+/usr/share/help/pl/meld/file-changes.page
+/usr/share/help/pl/meld/file-filters.page
+/usr/share/help/pl/meld/file-mode.page
+/usr/share/help/pl/meld/flattened-view.page
+/usr/share/help/pl/meld/folder-mode.page
+/usr/share/help/pl/meld/index.page
+/usr/share/help/pl/meld/introduction.page
+/usr/share/help/pl/meld/keyboard-shortcuts.page
+/usr/share/help/pl/meld/legal.xml
+/usr/share/help/pl/meld/missing-functionality.page
+/usr/share/help/pl/meld/preferences.page
+/usr/share/help/pl/meld/resolving-conflicts.page
+/usr/share/help/pl/meld/text-filters.page
+/usr/share/help/pl/meld/vc-mode.page
+/usr/share/help/pl/meld/vc-supported.page
+/usr/share/help/sv/meld/command-line.page
+/usr/share/help/sv/meld/file-changes.page
+/usr/share/help/sv/meld/file-filters.page
+/usr/share/help/sv/meld/file-mode.page
+/usr/share/help/sv/meld/flattened-view.page
+/usr/share/help/sv/meld/folder-mode.page
+/usr/share/help/sv/meld/index.page
+/usr/share/help/sv/meld/introduction.page
+/usr/share/help/sv/meld/keyboard-shortcuts.page
+/usr/share/help/sv/meld/legal.xml
+/usr/share/help/sv/meld/missing-functionality.page
+/usr/share/help/sv/meld/preferences.page
+/usr/share/help/sv/meld/resolving-conflicts.page
+/usr/share/help/sv/meld/text-filters.page
+/usr/share/help/sv/meld/vc-mode.page
+/usr/share/help/sv/meld/vc-supported.page
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/meld/14c4e1f2e383319099e47e974f26fba40e0c975d
+/usr/share/package-licenses/meld/4cc77b90af91e615a64ae04893fdffa7939db84c
+
+%files man
+%defattr(0644,root,root,0755)
+/usr/share/man/man1/meld.1
+
+%files python
+%defattr(-,root,root,-)
+
+%files python3
+%defattr(-,root,root,-)
+/usr/lib/python3*/*
+
+%files locales -f meld.lang
+%defattr(-,root,root,-)
+
