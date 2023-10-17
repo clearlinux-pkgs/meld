@@ -4,3 +4,4 @@ gtksourceview-dev
 pkgconfig(gtksourceview-4)
 pkgconfig(py3cairo)
 pkgconfig(pygobject-3.0)
+pkgconfig(python3)
